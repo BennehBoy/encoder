@@ -15,15 +15,15 @@
 // ----------------------------------------------------------------------------
 
 #include <stdint.h>
-#include <avr/io.h>
-#include <avr/interrupt.h>
+//#include <avr/io.h>
+//#include <avr/interrupt.h>
 #include <avr/pgmspace.h>
 #include "Arduino.h"
 
 // ----------------------------------------------------------------------------
 
 #define ENC_NORMAL        (1 << 1)   // use Peter Danneger's decoder
-#define ENC_FLAKY         (1 << 2)   // use Table-based decoder
+//#define ENC_FLAKY         (1 << 2)   // use Table-based decoder
 
 // ----------------------------------------------------------------------------
 
@@ -35,6 +35,11 @@
 #  ifndef ENC_HALFSTEP
 #    define ENC_HALFSTEP  1        // use table for half step per default
 #  endif
+#endif
+
+#if defined (ARDUINO_ARCH_STM32)
+    #define sei() interrupts()
+    #define cli() noInterrupts()
 #endif
 
 // ----------------------------------------------------------------------------
